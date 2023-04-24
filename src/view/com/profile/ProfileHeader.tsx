@@ -226,7 +226,11 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
             <TouchableOpacity
               testID="profileHeaderEditProfileButton"
               onPress={onPressEditProfile}
-              style={[styles.btn, styles.mainBtn, pal.btn]}>
+              style={[styles.btn, styles.mainBtn, pal.btn]}
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel="Edit profile"
+              accessibilityHint="Opens editor for profile display name, avatar, background image, and description">
               <Text type="button" style={pal.text}>
                 Edit Profile
               </Text>
@@ -238,7 +242,11 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
                 <TouchableOpacity
                   testID="unfollowBtn"
                   onPress={onPressToggleFollow}
-                  style={[styles.btn, styles.mainBtn, pal.btn]}>
+                  style={[styles.btn, styles.mainBtn, pal.btn]}
+                  accessible={true}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Unfollow ${view.handle}`}
+                  accessibilityHint={`Hides direct posts from ${view.handle} in your feed`}>
                   <FontAwesomeIcon
                     icon="check"
                     style={[pal.text, s.mr5]}
@@ -252,7 +260,11 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
                 <TouchableOpacity
                   testID="followBtn"
                   onPress={onPressToggleFollow}
-                  style={[styles.btn, styles.primaryBtn]}>
+                  style={[styles.btn, styles.primaryBtn]}
+                  accessible={true}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Follow ${view.handle}`}
+                  accessibilityHint={`Shows direct posts from ${view.handle} in your feed`}>
                   <FontAwesomeIcon
                     icon="plus"
                     style={[s.white as FontAwesomeIconStyle, s.mr5]}
@@ -296,7 +308,11 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
           <TouchableOpacity
             testID="profileHeaderFollowersButton"
             style={[s.flexRow, s.mr10]}
-            onPress={onPressFollowers}>
+            onPress={onPressFollowers}
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel={`Show ${view.handle}'s followers`}
+            accessibilityHint={`Shows folks following ${view.handle}`}>
             <Text type="md" style={[s.bold, s.mr2, pal.text]}>
               {view.followersCount}
             </Text>
@@ -307,7 +323,11 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
           <TouchableOpacity
             testID="profileHeaderFollowsButton"
             style={[s.flexRow, s.mr10]}
-            onPress={onPressFollows}>
+            onPress={onPressFollows}
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel={`Show ${view.handle}'s follows`}
+            accessibilityHint={`Shows folks followed by ${view.handle}`}>
             <Text type="md" style={[s.bold, s.mr2, pal.text]}>
               {view.followsCount}
             </Text>
@@ -348,7 +368,13 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
         ) : undefined}
       </View>
       {!isDesktopWeb && !hideBackButton && (
-        <TouchableWithoutFeedback onPress={onPressBack} hitSlop={BACK_HITSLOP}>
+        <TouchableWithoutFeedback
+          onPress={onPressBack}
+          hitSlop={BACK_HITSLOP}
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Go back"
+          accessibilityHint="Navigates to the previous screen">
           <View style={styles.backBtnWrapper}>
             <BlurView style={styles.backBtn} blurType="dark">
               <FontAwesomeIcon size={18} icon="angle-left" style={s.white} />
@@ -358,7 +384,11 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
       )}
       <TouchableWithoutFeedback
         testID="profileHeaderAviButton"
-        onPress={onPressAvi}>
+        onPress={onPressAvi}
+        accessible={true}
+        accessibilityRole="image"
+        accessibilityLabel={`View ${view.handle}'s avatar`}
+        accessibilityHint={`Opens ${view.handle}'s avatar in an image viewer`}>
         <View
           style={[pal.view, {borderColor: pal.colors.background}, styles.avi]}>
           <UserAvatar

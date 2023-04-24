@@ -12,6 +12,13 @@ import {Dimensions} from 'lib/media/types'
 import {AppBskyEmbedImages} from '@atproto/api'
 
 export const DELAY_PRESS_IN = 500
+const ACCESSIBILITY_ACTIONS = [
+  {
+    name: 'press',
+    label: 'Press',
+  },
+  {name: 'longpress', label: 'Long press'},
+]
 
 interface ImageLayoutGridProps {
   images: AppBskyEmbedImages.ViewImage[]
@@ -94,12 +101,30 @@ function ImageLayoutGridInner({
           delayPressIn={DELAY_PRESS_IN}
           onPress={() => onPress?.(0)}
           onPressIn={() => onPressIn?.(0)}
-          onLongPress={() => onLongPress?.(0)}>
+          onLongPress={() => onLongPress?.(0)}
+          accessible={true}
+          accessibilityLabel="Open first of two images"
+          accessibilityHint="Opens image in viewer"
+          accessibilityActions={ACCESSIBILITY_ACTIONS}
+          onAccessibilityAction={action => {
+            switch (action.nativeEvent.actionName) {
+              case 'press':
+                onPress?.(0)
+                break
+              case 'longpress':
+                onLongPress?.(0)
+                break
+              default:
+                break
+            }
+          }}>
           <Image
             source={{uri: images[0].thumb}}
             style={size1}
             accessible={true}
+            accessibilityIgnoresInvertColors
             accessibilityLabel={images[0].alt}
+            accessibilityHint={images[0].alt}
           />
         </TouchableOpacity>
         <View style={styles.wSpace} />
@@ -107,12 +132,29 @@ function ImageLayoutGridInner({
           delayPressIn={DELAY_PRESS_IN}
           onPress={() => onPress?.(1)}
           onPressIn={() => onPressIn?.(1)}
-          onLongPress={() => onLongPress?.(1)}>
+          onLongPress={() => onLongPress?.(1)}
+          accessibilityLabel="Open second of two images"
+          accessibilityHint="Opens image in viewer"
+          accessibilityActions={ACCESSIBILITY_ACTIONS}
+          onAccessibilityAction={action => {
+            switch (action.nativeEvent.actionName) {
+              case 'press':
+                onPress?.(1)
+                break
+              case 'longpress':
+                onLongPress?.(1)
+                break
+              default:
+                break
+            }
+          }}>
           <Image
             source={{uri: images[1].thumb}}
             style={size1}
             accessible={true}
+            accessibilityIgnoresInvertColors
             accessibilityLabel={images[1].alt}
+            accessibilityHint={images[1].alt}
           />
         </TouchableOpacity>
       </View>
@@ -125,12 +167,29 @@ function ImageLayoutGridInner({
           delayPressIn={DELAY_PRESS_IN}
           onPress={() => onPress?.(0)}
           onPressIn={() => onPressIn?.(0)}
-          onLongPress={() => onLongPress?.(0)}>
+          onLongPress={() => onLongPress?.(0)}
+          accessibilityLabel="Open first of three images"
+          accessibilityHint="Opens image in viewer"
+          accessibilityActions={ACCESSIBILITY_ACTIONS}
+          onAccessibilityAction={action => {
+            switch (action.nativeEvent.actionName) {
+              case 'press':
+                onPress?.(0)
+                break
+              case 'longpress':
+                onLongPress?.(0)
+                break
+              default:
+                break
+            }
+          }}>
           <Image
             source={{uri: images[0].thumb}}
             style={size2}
             accessible={true}
+            accessibilityIgnoresInvertColors
             accessibilityLabel={images[0].alt}
+            accessibilityHint={images[0].alt}
           />
         </TouchableOpacity>
         <View style={styles.wSpace} />
@@ -139,12 +198,30 @@ function ImageLayoutGridInner({
             delayPressIn={DELAY_PRESS_IN}
             onPress={() => onPress?.(1)}
             onPressIn={() => onPressIn?.(1)}
-            onLongPress={() => onLongPress?.(1)}>
+            onLongPress={() => onLongPress?.(1)}
+            accessible={true}
+            accessibilityLabel="Open second of three images"
+            accessibilityHint="Opens image in viewer"
+            accessibilityActions={ACCESSIBILITY_ACTIONS}
+            onAccessibilityAction={action => {
+              switch (action.nativeEvent.actionName) {
+                case 'press':
+                  onPress?.(1)
+                  break
+                case 'longpress':
+                  onLongPress?.(1)
+                  break
+                default:
+                  break
+              }
+            }}>
             <Image
               source={{uri: images[1].thumb}}
               style={size1}
               accessible={true}
+              accessibilityIgnoresInvertColors
               accessibilityLabel={images[1].alt}
+              accessibilityHint={images[1].alt}
             />
           </TouchableOpacity>
           <View style={styles.hSpace} />
@@ -152,12 +229,30 @@ function ImageLayoutGridInner({
             delayPressIn={DELAY_PRESS_IN}
             onPress={() => onPress?.(2)}
             onPressIn={() => onPressIn?.(2)}
-            onLongPress={() => onLongPress?.(2)}>
+            onLongPress={() => onLongPress?.(2)}
+            accessible={true}
+            accessibilityLabel="Open last of three images"
+            accessibilityHint="Opens image in viewer"
+            accessibilityActions={ACCESSIBILITY_ACTIONS}
+            onAccessibilityAction={action => {
+              switch (action.nativeEvent.actionName) {
+                case 'press':
+                  onPress?.(2)
+                  break
+                case 'longpress':
+                  onLongPress?.(2)
+                  break
+                default:
+                  break
+              }
+            }}>
             <Image
               source={{uri: images[2].thumb}}
               style={size1}
               accessible={true}
+              accessibilityIgnoresInvertColors
               accessibilityLabel={images[2].alt}
+              accessibilityHint={images[2].alt}
             />
           </TouchableOpacity>
         </View>
@@ -172,12 +267,30 @@ function ImageLayoutGridInner({
             delayPressIn={DELAY_PRESS_IN}
             onPress={() => onPress?.(0)}
             onPressIn={() => onPressIn?.(0)}
-            onLongPress={() => onLongPress?.(0)}>
+            onLongPress={() => onLongPress?.(0)}
+            accessible={true}
+            accessibilityLabel="Open first of four images"
+            accessibilityHint="Opens image in viewer"
+            accessibilityActions={ACCESSIBILITY_ACTIONS}
+            onAccessibilityAction={action => {
+              switch (action.nativeEvent.actionName) {
+                case 'press':
+                  onPress?.(0)
+                  break
+                case 'longpress':
+                  onLongPress?.(0)
+                  break
+                default:
+                  break
+              }
+            }}>
             <Image
               source={{uri: images[0].thumb}}
               style={size1}
               accessible={true}
+              accessibilityIgnoresInvertColors
               accessibilityLabel={images[0].alt}
+              accessibilityHint={images[0].alt}
             />
           </TouchableOpacity>
           <View style={styles.hSpace} />
@@ -185,12 +298,29 @@ function ImageLayoutGridInner({
             delayPressIn={DELAY_PRESS_IN}
             onPress={() => onPress?.(2)}
             onPressIn={() => onPressIn?.(2)}
-            onLongPress={() => onLongPress?.(2)}>
+            onLongPress={() => onLongPress?.(2)}
+            accessibilityLabel="Open second of four images"
+            accessibilityHint="Opens image in viewer"
+            accessibilityActions={ACCESSIBILITY_ACTIONS}
+            onAccessibilityAction={action => {
+              switch (action.nativeEvent.actionName) {
+                case 'press':
+                  onPress?.(2)
+                  break
+                case 'longpress':
+                  onLongPress?.(2)
+                  break
+                default:
+                  break
+              }
+            }}>
             <Image
               source={{uri: images[2].thumb}}
               style={size1}
               accessible={true}
+              accessibilityIgnoresInvertColors
               accessibilityLabel={images[2].alt}
+              accessibilityHint={images[2].alt}
             />
           </TouchableOpacity>
         </View>
@@ -200,12 +330,30 @@ function ImageLayoutGridInner({
             delayPressIn={DELAY_PRESS_IN}
             onPress={() => onPress?.(1)}
             onPressIn={() => onPressIn?.(1)}
-            onLongPress={() => onLongPress?.(1)}>
+            onLongPress={() => onLongPress?.(1)}
+            accessible={true}
+            accessibilityLabel="Open third of four images"
+            accessibilityHint="Opens image in viewer"
+            accessibilityActions={ACCESSIBILITY_ACTIONS}
+            onAccessibilityAction={action => {
+              switch (action.nativeEvent.actionName) {
+                case 'press':
+                  onPress?.(1)
+                  break
+                case 'longpress':
+                  onLongPress?.(1)
+                  break
+                default:
+                  break
+              }
+            }}>
             <Image
               source={{uri: images[1].thumb}}
               style={size1}
               accessible={true}
+              accessibilityIgnoresInvertColors
               accessibilityLabel={images[1].alt}
+              accessibilityHint={images[1].alt}
             />
           </TouchableOpacity>
           <View style={styles.hSpace} />
@@ -213,12 +361,30 @@ function ImageLayoutGridInner({
             delayPressIn={DELAY_PRESS_IN}
             onPress={() => onPress?.(3)}
             onPressIn={() => onPressIn?.(3)}
-            onLongPress={() => onLongPress?.(3)}>
+            onLongPress={() => onLongPress?.(3)}
+            accessible={true}
+            accessibilityLabel="Open last of four images"
+            accessibilityHint="Opens image in viewer"
+            accessibilityActions={ACCESSIBILITY_ACTIONS}
+            onAccessibilityAction={action => {
+              switch (action.nativeEvent.actionName) {
+                case 'press':
+                  onPress?.(3)
+                  break
+                case 'longpress':
+                  onLongPress?.(3)
+                  break
+                default:
+                  break
+              }
+            }}>
             <Image
               source={{uri: images[3].thumb}}
               style={size1}
               accessible={true}
+              accessibilityIgnoresInvertColors
               accessibilityLabel={images[3].alt}
+              accessibilityHint={images[3].alt}
             />
           </TouchableOpacity>
         </View>

@@ -5,7 +5,6 @@ import {IconProp} from '@fortawesome/fontawesome-svg-core'
 import {Image} from 'expo-image'
 import {colors} from 'lib/styles'
 import {openCamera, openCropper, openPicker} from '../../../lib/media/picker'
-import {Image as TImage} from 'lib/media/types'
 import {useStores} from 'state/index'
 import {
   usePhotoLibraryPermission,
@@ -14,13 +13,14 @@ import {
 import {DropdownButton} from './forms/DropdownButton'
 import {usePalette} from 'lib/hooks/usePalette'
 import {isWeb} from 'platform/detection'
+import {Image as RNImage} from 'react-native-image-crop-picker'
 
 export function UserBanner({
   banner,
   onSelectNewBanner,
 }: {
   banner?: string | null
-  onSelectNewBanner?: (img: TImage | null) => void
+  onSelectNewBanner?: (img: RNImage | null) => void
 }) {
   const store = useStores()
   const pal = usePalette('default')
@@ -91,6 +91,8 @@ export function UserBanner({
           testID="userBannerImage"
           style={styles.bannerImage}
           source={{uri: banner}}
+          accessible={true}
+          accessibilityIgnoresInvertColors
         />
       ) : (
         <View
@@ -113,6 +115,8 @@ export function UserBanner({
       style={styles.bannerImage}
       resizeMode="cover"
       source={{uri: banner}}
+      accessible={true}
+      accessibilityIgnoresInvertColors
     />
   ) : (
     <View

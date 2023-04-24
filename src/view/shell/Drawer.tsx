@@ -119,7 +119,12 @@ export const DrawerContent = observer(() => {
       ]}>
       <SafeAreaView style={s.flex1}>
         <View style={styles.main}>
-          <TouchableOpacity testID="profileCardButton" onPress={onPressProfile}>
+          <TouchableOpacity
+            testID="profileCardButton"
+            accessible={true}
+            accessibilityLabel="Profile"
+            accessibilityHint="Navigates to your profile"
+            onPress={onPressProfile}>
             <UserAvatar size={80} avatar={store.me.avatar} />
             <Text
               type="title-lg"
@@ -242,6 +247,13 @@ export const DrawerContent = observer(() => {
         <View style={styles.footer}>
           {!isWeb && (
             <TouchableOpacity
+              accessible={true}
+              accessibilityLabel="Toggle dark mode"
+              accessibilityHint={
+                theme.colorScheme === 'dark'
+                  ? 'Sets display to light mode'
+                  : 'Sets display to dark mode'
+              }
               onPress={onDarkmodePress}
               style={[
                 styles.footerBtn,
@@ -257,6 +269,10 @@ export const DrawerContent = observer(() => {
             </TouchableOpacity>
           )}
           <TouchableOpacity
+            accessible={true}
+            accessibilityRole="link"
+            accessibilityLabel="Send feedback"
+            accessibilityHint="Opens Google Forms feedback link"
             onPress={onPressFeedback}
             style={[
               styles.footerBtn,
@@ -298,7 +314,9 @@ function MenuItem({
     <TouchableOpacity
       testID={`menuItemButton-${label}`}
       style={styles.menuItem}
-      onPress={onPress}>
+      onPress={onPress}
+      accessibilityLabel="Menu"
+      accessibilityHint="Opens left hand side navigation">
       <View style={[styles.menuItemIconWrapper]}>
         {icon}
         {count ? (
@@ -340,7 +358,11 @@ const InviteCodes = observer(() => {
     <TouchableOpacity
       testID="menuItemInviteCodes"
       style={[styles.inviteCodes]}
-      onPress={onPress}>
+      onPress={onPress}
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityLabel="Invite codes"
+      accessibilityHint="Opens list of invite codes">
       <FontAwesomeIcon
         icon="ticket"
         style={[

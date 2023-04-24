@@ -59,7 +59,14 @@ export function PostHider({
         </Text>
         <TouchableOpacity
           style={styles.showBtn}
-          onPress={() => setOverride(v => !v)}>
+          onPress={() => setOverride(v => !v)}
+          accessible={true}
+          accessibilityLabel={override ? 'Hide post' : 'Show post'}
+          accessibilityHint={
+            override
+              ? 'Re-hides post from muted account'
+              : 'Shows post from muted account'
+          }>
           <Text type="md" style={pal.link}>
             {override ? 'Hide' : 'Show'} post
           </Text>

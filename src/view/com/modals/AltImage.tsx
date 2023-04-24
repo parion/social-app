@@ -36,7 +36,8 @@ export function Component({onAltTextSet}: Props) {
   return (
     <View
       testID="altTextImageModal"
-      style={[pal.view, styles.container, s.flex1]}>
+      style={[pal.view, styles.container, s.flex1]}
+      nativeID="imageAltText">
       <Text style={[styles.title, pal.text]}>Add alt text</Text>
       <TextInput
         testID="altTextImageInput"
@@ -45,9 +46,19 @@ export function Component({onAltTextSet}: Props) {
         multiline
         value={altText}
         onChangeText={text => setAltText(enforceLen(text, MAX_ALT_TEXT))}
+        accessible={true}
+        accessibilityLabel="Image alt text"
+        accessibilityHint="Sets image alt text for screenreaders"
+        accessibilityLabelledBy="imageAltText"
       />
       <View style={styles.buttonControls}>
-        <TouchableOpacity testID="altTextImageSaveBtn" onPress={onPressSave}>
+        <TouchableOpacity
+          testID="altTextImageSaveBtn"
+          onPress={onPressSave}
+          accessible={true}
+          accessibilityLabel="Save alt text"
+          accessibilityHint={`Saves alt text, which reads: ${altText}`}
+          accessibilityRole="button">
           <LinearGradient
             colors={[gradients.blueLight.start, gradients.blueLight.end]}
             start={{x: 0, y: 0}}
@@ -60,7 +71,12 @@ export function Component({onAltTextSet}: Props) {
         </TouchableOpacity>
         <TouchableOpacity
           testID="altTextImageCancelBtn"
-          onPress={onPressCancel}>
+          onPress={onPressCancel}
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Cancel add image alt text"
+          accessibilityHint="Exits adding alt text to image"
+          onAccessibilityEscape={onPressCancel}>
           <View style={[styles.button]}>
             <Text type="button-lg" style={[pal.textLight]}>
               Cancel
