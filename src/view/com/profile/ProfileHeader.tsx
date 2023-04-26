@@ -227,7 +227,6 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
               testID="profileHeaderEditProfileButton"
               onPress={onPressEditProfile}
               style={[styles.btn, styles.mainBtn, pal.btn]}
-              accessible={true}
               accessibilityRole="button"
               accessibilityLabel="Edit profile"
               accessibilityHint="Opens editor for profile display name, avatar, background image, and description">
@@ -335,14 +334,12 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
               following
             </Text>
           </TouchableOpacity>
-          <View style={[s.flexRow, s.mr10]}>
-            <Text type="md" style={[s.bold, s.mr2, pal.text]}>
-              {view.postsCount}
-            </Text>
+          <Text type="md" style={[s.bold, pal.text]}>
+            {view.postsCount}{' '}
             <Text type="md" style={[pal.textLight]}>
               {pluralize(view.postsCount, 'post')}
             </Text>
-          </View>
+          </Text>
         </View>
         {view.descriptionRichText ? (
           <RichText
@@ -385,7 +382,6 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
       <TouchableWithoutFeedback
         testID="profileHeaderAviButton"
         onPress={onPressAvi}
-        accessible={true}
         accessibilityRole="image"
         accessibilityLabel={`View ${view.handle}'s avatar`}
         accessibilityHint={`Opens ${view.handle}'s avatar in an image viewer`}>
