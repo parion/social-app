@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ComponentProps} from 'react'
 import {
   Linking,
   SafeAreaView,
@@ -48,6 +48,8 @@ export const DrawerContent = observer(() => {
   const {track} = useAnalytics()
   const {isAtHome, isAtSearch, isAtNotifications, isAtMyProfile} =
     useNavigationTabState()
+
+  const {notifications} = store.me
 
   // events
   // =
@@ -168,6 +170,7 @@ export const DrawerContent = observer(() => {
               )
             }
             label="Search"
+            accessibilityLabel="Search"
             bold={isAtSearch}
             onPress={onPressSearch}
           />
@@ -188,6 +191,8 @@ export const DrawerContent = observer(() => {
               )
             }
             label="Home"
+            accessibilityLabel="Home"
+            accessibilityHint="Navigates to default feed"
             bold={isAtHome}
             onPress={onPressHome}
           />
@@ -208,7 +213,13 @@ export const DrawerContent = observer(() => {
               )
             }
             label="Notifications"
-            count={store.me.notifications.unreadCountLabel}
+            accessibilityLabel={
+              notifications.unreadCountLabel === '1'
+                ? 'Notifications: 1 unread notification'
+                : `Notifications: ${notifications.unreadCountLabel} unread notifications`
+            }
+            accessibilityHint="Opens notification feed"
+            count={notifications.unreadCountLabel}
             bold={isAtNotifications}
             onPress={onPressNotifications}
           />
@@ -229,6 +240,7 @@ export const DrawerContent = observer(() => {
               )
             }
             label="Profile"
+            accessibilityLabel="Profile"
             onPress={onPressProfile}
           />
           <MenuItem
@@ -240,6 +252,7 @@ export const DrawerContent = observer(() => {
               />
             }
             label="Settings"
+            accessibilityLabel="Settings"
             onPress={onPressSettings}
           />
         </View>
@@ -247,7 +260,7 @@ export const DrawerContent = observer(() => {
         <View style={styles.footer}>
           {!isWeb && (
             <TouchableOpacity
-              accessible={true}
+              accessibilityRole="button"
               accessibilityLabel="Toggle dark mode"
               accessibilityHint={
                 theme.colorScheme === 'dark'
@@ -296,27 +309,30 @@ export const DrawerContent = observer(() => {
   )
 })
 
-function MenuItem({
-  icon,
-  label,
-  count,
-  bold,
-  onPress,
-}: {
+interface MenuItemProps extends ComponentProps<typeof TouchableOpacity> {
   icon: JSX.Element
   label: string
   count?: string
   bold?: boolean
-  onPress: () => void
-}) {
+}
+
+function MenuItem({
+  icon,
+  label,
+  accessibilityLabel,
+  count,
+  bold,
+  onPress,
+}: MenuItemProps) {
   const pal = usePalette('default')
   return (
     <TouchableOpacity
       testID={`menuItemButton-${label}`}
       style={styles.menuItem}
       onPress={onPress}
-      accessibilityLabel="Menu"
-      accessibilityHint="Double tap to open access to navigation items like profile, search, and settings">
+      accessibilityRole="menuitem"
+      accessibilityLabel={accessibilityLabel}
+      accessibilityHint="">
       <View style={[styles.menuItemIconWrapper]}>
         {icon}
         {count ? (
@@ -349,6 +365,7 @@ const InviteCodes = observer(() => {
   const {track} = useAnalytics()
   const store = useStores()
   const pal = usePalette('default')
+  const {invitesAvailable} = store.me
   const onPress = React.useCallback(() => {
     track('Menu:ItemClicked', {url: '#invite-codes'})
     store.shell.closeDrawer()
@@ -359,9 +376,12 @@ const InviteCodes = observer(() => {
       testID="menuItemInviteCodes"
       style={[styles.inviteCodes]}
       onPress={onPress}
-      accessible={true}
       accessibilityRole="button"
-      accessibilityLabel="Invite codes"
+      accessibilityLabel={
+        invitesAvailable === 1
+          ? 'Invite codes: 1 available'
+          : `Invite codes: ${invitesAvailable} available`
+      }
       accessibilityHint="Opens list of invite codes">
       <FontAwesomeIcon
         icon="ticket"
