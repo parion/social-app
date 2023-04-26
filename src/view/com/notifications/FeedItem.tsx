@@ -190,7 +190,6 @@ export const FeedItem = observer(function FeedItem({
       <View style={styles.layoutContent}>
         <Pressable
           onPress={authors.length > 1 ? onToggleAuthorsExpanded : () => {}}
-          accessible={true}
           accessibilityRole="button"
           accessibilityLabel="Show users"
           accessibilityHint="Expands list of users for the given notification">
@@ -247,7 +246,6 @@ function CondensedAuthorsList({
         <TouchableOpacity
           style={styles.expandedAuthorsCloseBtn}
           onPress={onToggleAuthorsExpanded}
-          accessible={true}
           accessibilityRole="button"
           accessibilityLabel="Hide user list"
           accessibilityHint="Collapses list of users for a given notification">
