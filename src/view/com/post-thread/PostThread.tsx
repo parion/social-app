@@ -159,7 +159,6 @@ export const PostThread = observer(function PostThread({
             </Text>
             <TouchableOpacity
               onPress={onPressBack}
-              accessible={true}
               accessibilityRole="button"
               accessibilityLabel="Go back"
               accessibilityHint="Navigates to the previous screen">
