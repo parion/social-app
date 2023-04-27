@@ -103,8 +103,7 @@ function ImageLayoutGridInner({
           onPressIn={() => onPressIn?.(0)}
           onLongPress={() => onLongPress?.(0)}
           accessible={true}
-          accessibilityLabel="Open first of two images"
-          accessibilityHint="Opens image in viewer"
+          accessibilityRole="image"
           accessibilityActions={ACCESSIBILITY_ACTIONS}
           onAccessibilityAction={action => {
             switch (action.nativeEvent.actionName) {
@@ -168,8 +167,7 @@ function ImageLayoutGridInner({
           onPress={() => onPress?.(0)}
           onPressIn={() => onPressIn?.(0)}
           onLongPress={() => onLongPress?.(0)}
-          accessibilityLabel="Open first of three images"
-          accessibilityHint="Opens image in viewer"
+          accessibilityRole="image"
           accessibilityActions={ACCESSIBILITY_ACTIONS}
           onAccessibilityAction={action => {
             switch (action.nativeEvent.actionName) {
@@ -268,9 +266,7 @@ function ImageLayoutGridInner({
             onPress={() => onPress?.(0)}
             onPressIn={() => onPressIn?.(0)}
             onLongPress={() => onLongPress?.(0)}
-            accessible={true}
-            accessibilityLabel="Open first of four images"
-            accessibilityHint="Opens image in viewer"
+            accessibilityRole="image"
             accessibilityActions={ACCESSIBILITY_ACTIONS}
             onAccessibilityAction={action => {
               switch (action.nativeEvent.actionName) {
@@ -299,8 +295,7 @@ function ImageLayoutGridInner({
             onPress={() => onPress?.(2)}
             onPressIn={() => onPressIn?.(2)}
             onLongPress={() => onLongPress?.(2)}
-            accessibilityLabel="Open second of four images"
-            accessibilityHint="Opens image in viewer"
+            accessibilityRole="image"
             accessibilityActions={ACCESSIBILITY_ACTIONS}
             onAccessibilityAction={action => {
               switch (action.nativeEvent.actionName) {
@@ -331,9 +326,7 @@ function ImageLayoutGridInner({
             onPress={() => onPress?.(1)}
             onPressIn={() => onPressIn?.(1)}
             onLongPress={() => onLongPress?.(1)}
-            accessible={true}
-            accessibilityLabel="Open third of four images"
-            accessibilityHint="Opens image in viewer"
+            accessibilityRole="image"
             accessibilityActions={ACCESSIBILITY_ACTIONS}
             onAccessibilityAction={action => {
               switch (action.nativeEvent.actionName) {
@@ -362,9 +355,7 @@ function ImageLayoutGridInner({
             onPress={() => onPress?.(3)}
             onPressIn={() => onPressIn?.(3)}
             onLongPress={() => onLongPress?.(3)}
-            accessible={true}
-            accessibilityLabel="Open last of four images"
-            accessibilityHint="Opens image in viewer"
+            accessibilityRole="image"
             accessibilityActions={ACCESSIBILITY_ACTIONS}
             onAccessibilityAction={action => {
               switch (action.nativeEvent.actionName) {

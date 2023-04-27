@@ -66,7 +66,6 @@ export function Component({
           testID="confirmBtn"
           onPress={onPress}
           style={[styles.btn]}
-          accessible={true}
           accessibilityRole="button"
           accessibilityLabel="Confirm"
           // TODO: This needs to be updated so that modal roles are clear;
