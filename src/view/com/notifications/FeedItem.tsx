@@ -159,6 +159,7 @@ export const FeedItem = observer(function FeedItem({
   }
 
   return (
+    // eslint-disable-next-line
     <Link
       testID={`feedItem-by-${item.author.handle}`}
       style={[
