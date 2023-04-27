@@ -147,6 +147,7 @@ export function UserAvatar({
             borderRadius: Math.floor(size / 2),
           }}
           source={{uri: avatar}}
+          accessibilityRole="image"
         />
       ) : (
         <DefaultAvatar size={size} />
@@ -163,7 +164,11 @@ export function UserAvatar({
     <View style={{width: size, height: size}}>
       <HighPriorityImage
         testID="userAvatarImage"
-        style={{width: size, height: size, borderRadius: Math.floor(size / 2)}}
+        style={{
+          width: size,
+          height: size,
+          borderRadius: Math.floor(size / 2),
+        }}
         contentFit="cover"
         source={{uri: avatar}}
       />

@@ -155,7 +155,11 @@ export const PostThreadItem = observer(function PostThreadItem({
         ]}>
         <View style={styles.layout}>
           <View style={styles.layoutAvi}>
-            <Link href={authorHref} title={authorTitle} asAnchor>
+            <Link
+              href={authorHref}
+              title={authorTitle}
+              asAnchor
+              accessibilityLabel={`${item.post.author.handle}'s avatar`}>
               <UserAvatar
                 size={52}
                 avatar={item.post.author.avatar}
@@ -187,7 +191,7 @@ export const PostThreadItem = observer(function PostThreadItem({
               <View style={s.flex1} />
               <PostDropdownBtn
                 testID="postDropdownBtn"
-                style={styles.metaItem}
+                style={[styles.metaItem, s.mt2, s.px5]}
                 itemUri={itemUri}
                 itemCid={itemCid}
                 itemHref={itemHref}
@@ -201,7 +205,7 @@ export const PostThreadItem = observer(function PostThreadItem({
                 <FontAwesomeIcon
                   icon="ellipsis-h"
                   size={14}
-                  style={[s.mt2, s.px5, pal.textLight]}
+                  style={[pal.textLight]}
                 />
               </PostDropdownBtn>
             </View>
@@ -442,10 +446,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   layoutAvi: {
-    width: 70,
     paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
+    marginRight: 10,
   },
   layoutContent: {
     flex: 1,

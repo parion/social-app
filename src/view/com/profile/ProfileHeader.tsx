@@ -368,7 +368,6 @@ const ProfileHeaderLoaded = observer(function ProfileHeaderLoaded({
         <TouchableWithoutFeedback
           onPress={onPressBack}
           hitSlop={BACK_HITSLOP}
-          accessible={true}
           accessibilityRole="button"
           accessibilityLabel="Go back"
           accessibilityHint="Navigates to the previous screen">
