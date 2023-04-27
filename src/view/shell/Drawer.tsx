@@ -170,6 +170,7 @@ export const DrawerContent = observer(() => {
             }
             label="Search"
             accessibilityLabel="Search"
+            accessibilityHint="Search through users and posts"
             bold={isAtSearch}
             onPress={onPressSearch}
           />
@@ -240,6 +241,7 @@ export const DrawerContent = observer(() => {
             }
             label="Profile"
             accessibilityLabel="Profile"
+            accessibilityHint="See profile display name, avatar, description, and other profile items"
             onPress={onPressProfile}
           />
           <MenuItem
@@ -252,6 +254,7 @@ export const DrawerContent = observer(() => {
             }
             label="Settings"
             accessibilityLabel="Settings"
+            accessibilityHint="Manage settings for your account, like handle, content moderation, and app passwords"
             onPress={onPressSettings}
           />
         </View>
