@@ -1,14 +1,9 @@
-import React, {createRef, useState, useMemo, useRef} from 'react'
+import React, {useMemo, useRef} from 'react'
 import {Animated, StyleSheet, View} from 'react-native'
 import {Text} from '../util/text/Text'
 import {PressableWithHover} from '../util/PressableWithHover'
 import {usePalette} from 'lib/hooks/usePalette'
 import {isDesktopWeb} from 'platform/detection'
-
-interface Layout {
-  x: number
-  width: number
-}
 
 export interface TabBarProps {
   testID?: string
@@ -34,59 +29,72 @@ export function TabBar({
   onPressSelected,
 }: TabBarProps) {
   const pal = usePalette('default')
-  const [itemLayouts, setItemLayouts] = useState<Layout[]>(
-    items.map(() => ({x: 0, width: 0})),
-  )
-  const itemRefs = useMemo(
-    () => Array.from({length: items.length}).map(() => createRef<View>()),
-    [items.length],
-  )
+
+  const itemRefs = useRef<(typeof PressableWithHover)[]>([])
+  const itemLayouts = useMemo(() => {
+    if (itemRefs.current !== undefined) {
+      return itemRefs.current.map(ref => {
+        return {x: ref.offsetLeft, width: ref.clientWidth - 12}
+      })
+    }
+
+    return []
+  }, [itemRefs.current?.length])
+
   const panX = Animated.add(position, offset)
   const containerRef = useRef<View>(null)
 
-  const indicatorStyle = {
-    backgroundColor: indicatorColor || pal.colors.link,
-    bottom:
-      indicatorPosition === 'bottom' ? (isDesktopWeb ? 0 : -1) : undefined,
-    top: indicatorPosition === 'top' ? (isDesktopWeb ? 0 : -1) : undefined,
-    transform: [
-      {
-        translateX: panX.interpolate({
-          inputRange: items.map((_item, i) => i),
-          outputRange: itemLayouts.map(l => l.x + l.width / 2),
-        }),
-      },
-      {
-        scaleX: panX.interpolate({
-          inputRange: items.map((_item, i) => i),
-          outputRange: itemLayouts.map(l => l.width),
-        }),
-      },
-    ],
-  }
-
-  const onLayout = () => {
-    const promises = []
-    for (let i = 0; i < items.length; i++) {
-      promises.push(
-        new Promise<Layout>(resolve => {
-          if (!containerRef.current || !itemRefs[i].current) {
-            return resolve({x: 0, width: 0})
-          }
-
-          itemRefs[i].current?.measureLayout(
-            containerRef.current,
-            (x: number, _y: number, width: number) => {
-              resolve({x, width})
+  const indicatorStyle =
+    itemLayouts.length === 2
+      ? {
+          backgroundColor: indicatorColor || pal.colors.link,
+          bottom:
+            indicatorPosition === 'bottom'
+              ? isDesktopWeb
+                ? 0
+                : -1
+              : undefined,
+          top:
+            indicatorPosition === 'top' ? (isDesktopWeb ? 0 : -1) : undefined,
+          transform: [
+            {
+              translateX: panX.interpolate({
+                inputRange: items.map((_item, i) => i),
+                outputRange: itemLayouts.map(l => l.x + l.width / 2),
+              }),
             },
-          )
-        }),
-      )
-    }
-    Promise.all(promises).then((layouts: Layout[]) => {
-      setItemLayouts(layouts)
-    })
-  }
+            {
+              scaleX: panX.interpolate({
+                inputRange: items.map((_item, i) => i),
+                outputRange: itemLayouts.map(l => l.width),
+              }),
+            },
+          ],
+        }
+      : {}
+
+  // const onLayout = () => {
+  //   const promises = []
+  //   for (let i = 0; i < items.length; i++) {
+  //     promises.push(
+  //       new Promise<Layout>(resolve => {
+  //         if (!containerRef.current || !itemRefs[i].current) {
+  //           return resolve({x: 0, width: 0})
+  //         }
+
+  //         itemRefs[i].current?.measureLayout(
+  //           containerRef.current,
+  //           (x: number, _y: number, width: number) => {
+  //             resolve({x, width})
+  //           },
+  //         )
+  //       }),
+  //     )
+  //   }
+  //   Promise.all(promises).then((layouts: Layout[]) => {
+  //     setItemLayouts(layouts)
+  //   })
+  // }
 
   const onPressItem = (index: number) => {
     onSelect?.(index)
@@ -99,14 +107,14 @@ export function TabBar({
     <View
       testID={testID}
       style={[pal.view, styles.outer]}
-      onLayout={onLayout}
+      // onLayout={onLayout}
       ref={containerRef}>
       <Animated.View style={[styles.indicator, indicatorStyle]} />
       {items.map((item, i) => {
         const selected = i === selectedPage
         return (
           <PressableWithHover
-            ref={itemRefs[i]}
+            ref={el => (itemRefs.current[i] = el)}
             key={item}
             style={
               indicatorPosition === 'top' ? styles.itemTop : styles.itemBottom
