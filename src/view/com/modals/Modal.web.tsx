@@ -16,6 +16,7 @@ import * as RepostModal from './Repost'
 import * as CropImageModal from './crop-image/CropImage.web'
 import * as AltTextImageModal from './AltImage'
 import * as AltTextImageReadModal from './AltImageRead'
+import * as EditImageModal from './EditImage'
 import * as ChangeHandleModal from './ChangeHandle'
 import * as WaitlistModal from './Waitlist'
 import * as InviteCodesModal from './InviteCodes'
@@ -91,6 +92,8 @@ function Modal({modal}: {modal: ModalIface}) {
     element = <AltTextImageModal.Component {...modal} />
   } else if (modal.name === 'alt-text-image-read') {
     element = <AltTextImageReadModal.Component {...modal} />
+  } else if (modal.name === 'edit-image') {
+    element = <EditImageModal.Component {...modal} />
   } else {
     return null
   }

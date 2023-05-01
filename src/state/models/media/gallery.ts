@@ -5,6 +5,7 @@ import {Image as RNImage} from 'react-native-image-crop-picker'
 import {openPicker} from 'lib/media/picker'
 import {getImageDim} from 'lib/media/manip'
 import {getDataUriSize} from 'lib/media/util'
+import {isDesktopWeb} from 'platform/detection'
 
 export class GalleryModel {
   images: ImageModel[] = []
@@ -45,6 +46,20 @@ export class GalleryModel {
     }
   }
 
+  async edit(image: ImageModel) {
+    if (isDesktopWeb) {
+      this.rootStore.shell.openModal({
+        name: 'edit-image',
+        image,
+        gallery: this,
+      })
+
+      return
+    } else {
+      this.crop(image)
+    }
+  }
+
   async paste(uri: string) {
     if (this.size >= 4) {
       return
@@ -65,8 +80,8 @@ export class GalleryModel {
     })
   }
 
-  setAltText(image: ImageModel) {
-    image.setAltText()
+  setAltText(image: ImageModel, altText: string) {
+    image.setAltText(altText)
   }
 
   crop(image: ImageModel) {
@@ -76,6 +91,10 @@ export class GalleryModel {
   remove(image: ImageModel) {
     const index = this.images.findIndex(image_ => image_.path === image.path)
     this.images.splice(index, 1)
+  }
+
+  async previous(image: ImageModel) {
+    image.previous()
   }
 
   async pick() {

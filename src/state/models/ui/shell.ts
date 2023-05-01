@@ -5,6 +5,7 @@ import {ProfileModel} from '../content/profile'
 import {isObj, hasProp} from 'lib/type-guards'
 import {Image as RNImage} from 'react-native-image-crop-picker'
 import {ImageModel} from '../media/image'
+import {GalleryModel} from '../media/gallery'
 
 export interface ConfirmModal {
   name: 'confirm'
@@ -35,6 +36,12 @@ export interface ReportPostModal {
 export interface ReportAccountModal {
   name: 'report-account'
   did: string
+}
+
+export interface EditImageModal {
+  name: 'edit-image'
+  image: ImageModel
+  gallery: GalleryModel
 }
 
 export interface CropImageModal {
@@ -108,6 +115,7 @@ export type Modal =
   | AltTextImageModal
   | AltTextImageReadModal
   | CropImageModal
+  | EditImageModal
   | ServerInputModal
   | RepostModal
 

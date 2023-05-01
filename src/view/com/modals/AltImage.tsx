@@ -26,7 +26,6 @@ export function Component({image}: Props) {
   const [altText, setAltText] = useState(image.altText)
 
   const onPressSave = useCallback(() => {
-    setAltText(altText)
     image.setAltText(altText)
     store.shell.closeModal()
   }, [store, image, altText])
