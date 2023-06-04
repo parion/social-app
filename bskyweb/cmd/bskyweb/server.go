@@ -110,6 +110,7 @@ func serve(cctx *cli.Context) error {
 	e.GET("/notifications", server.WebGeneric)
 	e.GET("/moderation", server.WebGeneric)
 	e.GET("/moderation/mute-lists", server.WebGeneric)
+	e.GET("/moderation/mute-keywords", server.WebGeneric)
 	e.GET("/moderation/muted-accounts", server.WebGeneric)
 	e.GET("/moderation/blocked-accounts", server.WebGeneric)
 	e.GET("/settings", server.WebGeneric)

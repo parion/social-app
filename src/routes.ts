@@ -7,6 +7,7 @@ export const router = new Router({
   Settings: '/settings',
   Moderation: '/moderation',
   ModerationMuteLists: '/moderation/mute-lists',
+  ModerationMuteKeywords: '/moderation/mute-keywords',
   ModerationMutedAccounts: '/moderation/muted-accounts',
   ModerationBlockedAccounts: '/moderation/blocked-accounts',
   Profile: '/profile/:name',

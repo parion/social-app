@@ -56,6 +56,7 @@ import {ModerationMutedAccounts} from 'view/screens/ModerationMutedAccounts'
 import {ModerationBlockedAccounts} from 'view/screens/ModerationBlockedAccounts'
 import {getRoutingInstrumentation} from 'lib/sentry'
 import {bskyTitle} from 'lib/strings/headings'
+import {ModerationMuteKeywordsScreen} from 'view/screens/ModerationMuteKeywords'
 
 const navigationRef = createNavigationContainerRef<AllNavigatorParams>()
 
@@ -88,6 +89,11 @@ function commonScreens(Stack: typeof HomeTab, unreadCountLabel?: string) {
       <Stack.Screen
         name="ModerationMuteLists"
         component={ModerationMuteListsScreen}
+        options={{title: title('Mute Lists')}}
+      />
+      <Stack.Screen
+        name="ModerationMuteKeywords"
+        component={ModerationMuteKeywordsScreen}
         options={{title: title('Mute Lists')}}
       />
       <Stack.Screen

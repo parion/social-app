@@ -79,6 +79,20 @@ export const ModerationScreen = withAuthRequired(
           </Text>
         </Link>
         <Link
+          testID="muteKeywordsBtn"
+          style={[styles.linkCard, pal.view]}
+          href="/moderation/mute-keywords">
+          <View style={[styles.iconContainer, pal.btn]}>
+            <FontAwesomeIcon
+              icon="comment-slash"
+              style={pal.text as FontAwesomeIconStyle}
+            />
+          </View>
+          <Text type="lg" style={pal.text}>
+            Mute keywords
+          </Text>
+        </Link>
+        <Link
           testID="mutedAccountsBtn"
           style={[styles.linkCard, pal.view]}
           href="/moderation/muted-accounts">
